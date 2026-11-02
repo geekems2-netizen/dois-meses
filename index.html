@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#b9dcf7">
+<title>Nosso Universo — 2 meses ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root {
+  --blue: #b9dcf7;
+  --light: #eaf5ff;
+  --dark: #315c82;
+  --medium: #79add5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--blue);
+  color: var(--dark);
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+}
+
+#sky {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  color: white;
+  font-family: cursive;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity: .45; transform: rotate(-10deg) scale(.9); }
+  50% { opacity: 1; transform: rotate(10deg) scale(1.15); }
+}
+
+.screen {
+  min-height: 100vh;
+  display: none;
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 16px;
+}
+
+.screen.active {
+  display: flex;
+  animation: appear .8s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+}
+
+.panel, .section {
+  background: rgba(255,255,255,.84);
+  border: 2px dashed #91bee0;
+  border-radius: 27px;
+  padding: 32px 23px;
+  box-shadow: 0 10px 35px rgba(69,120,165,.13);
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 3.3rem);
+  margin: 15px 0;
+}
+
+h2 {
+  font-size: 1.7rem;
+  margin-bottom: 15px;
+}
+
+p {
+  line-height: 1.9;
+  font-size: 15px;
+}
+
+.small {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.doodle {
+  font-family: cursive;
+  color: white;
+  font-size: 32px;
+  margin: 15px 0;
+  letter-spacing: 12px;
+}
+
+input {
+  width: 100%;
+  max-width: 280px;
+  padding: 14px;
+  margin: 20px 0 10px;
+  border: 2px dashed #8ebce1;
+  border-radius: 18px;
+  background: white;
+  text-align: center;
+  color: var(--dark);
+  outline: none;
+  font-size: 16px;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  background: #79add5;
+  color: white;
+  padding: 13px 25px;
+  margin: 10px 5px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn:hover {
+  background: #548fbd;
+  transform: translateY(-3px);
+}
+
+.error {
+  color: #b75c78;
+  min-height: 20px;
+  font-size: 13px;
+}
+
+#site {
+  display: none;
+  position: relative;
+  z-index: 1;
+  padding: 25px 15px;
+}
+
+header {
+  text-align: center;
+  padding: 65px 10px;
+}
+
+header h1 { color: #315c82; }
+
+.subtitle {
+  font-size: 15px;
+  color: #527da2;
+}
+
+.section {
+  max-width: 650px;
+  margin: 30px auto;
+  text-align: center;
+  scroll-margin-top: 20px;
+}
+
+.section h2 { color: #477ca7; }
+
+.chapter {
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  color: #80afd2;
+}
+
+.divider {
+  color: #83b6dc;
+  margin: 20px 0;
+  font-size: 22px;
+}
+
+.counter {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.time {
+  background: #e6f3ff;
+  border: 1px dashed #9bc8e8;
+  border-radius: 18px;
+  padding: 18px 5px;
+}
+
+.time strong {
+  display: block;
+  font-size: 27px;
+  color: #477ca7;
+}
+
+.time span {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.final-message {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #477ca7;
+}
+
+.letter {
+  text-align: left;
+  line-height: 2;
+  white-space: normal;
+}
+
+.signature {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: #477ca7;
+  font-size: 19px;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  padding: 50px 10px;
+  color: #477ca7;
+  font-size: 13px;
+}
+
+.hidden { display: none; }
+
+.reveal { animation: appear .8s ease; }
+
+@media(max-width: 420px) {
+  .panel, .section { padding: 25px 17px; }
+  h2 { font-size: 1.45rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="sky"></div>
+
+<!-- TELA DE SENHA -->
+<section class="screen active" id="login">
+  <div class="container panel">
+    <div class="doodle">☆ ✧ ☆</div>
+    <p class="small">um lugar só nosso</p>
+    <h1>Nosso Universo</h1>
+
+    <p>
+      Algumas histórias merecem ser guardadas
+      em lugares especiais.
+    </p>
+
+    <p style="margin-top:12px">
+      E essa é a nossa. ♡
+    </p>
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Digite nossa senha..."
+      autocomplete="off"
+    >
+
+    <p style="font-size:13px; color:#527da2;">
+      Pista: stand do Dio Brando ⭐
+    </p>
+
+    <button class="btn" onclick="checkPassword()">
+      Entrar no nosso universo ♡
+    </button>
+
+    <p class="error" id="error"></p>
+    <div class="doodle">✩ ♡ ✩</div>
+  </div>
+</section>
+
+<!-- APRESENTAÇÃO -->
+<section class="screen" id="welcome">
+  <div class="container panel">
+    <div class="doodle">☆ ⋆ ☆</div>
+
+    <p class="small">02 de novembro de 2026</p>
+    <h1>Dois meses de nós.</h1>
+
+    <p>
+      Dois meses desde que começamos a escrever
+      uma história que é só nossa.
+    </p>
+
+    <div class="divider">♡ ☆ ♡</div>
+
+    <p>
+      E se o primeiro mês foi o começo,
+      esse é mais um capítulo que eu quero
+      guardar para sempre.
+    </p>
+
+    <button class="btn" onclick="showSite()">
+      Continuar nossa história →
+    </button>
+  </div>
+</section>
+
+<!-- SITE PRINCIPAL -->
+<main id="site">
+
+<header>
+  <p class="small">☆ nosso pequeno universo ☆</p>
+  <h1>Dois meses de nós 💙</h1>
+
+  <p class="subtitle">
+    Uma história, duas pessoas e infinitos motivos para continuar.
+  </p>
+
+  <div class="doodle">☆ ✧ ♡ ✧ ☆</div>
+
+  <button class="btn"
+    onclick="document.getElementById('cap1').scrollIntoView({behavior:'smooth'})">
+    Começar a ler ↓
+  </button>
+</header>
+
+<section class="section" id="cap1">
+  <p class="chapter">CAPÍTULO I</p>
+  <h2>O dia que mudou tudo</h2>
+  <div class="divider">☆</div>
+
+  <p>
+    [ESCREVA AQUI SOBRE COMO TUDO COMEÇOU,
+    COMO VOCÊS SE CONHECERAM E O QUE SENTIU.]
+  </p>
+
+  <div class="divider">♡ ✧ ♡</div>
+</section>
+
+<section class="section" id="cap2">
+  <p class="chapter">CAPÍTULO II</p>
+  <h2>Dois meses depois...</h2>
+  <div class="divider">✩</div>
+
+  <p>
+    [ESCREVA AQUI SOBRE ESSES DOIS MESES,
+    OS MOMENTOS QUE VIVERAM E COMO A RELAÇÃO
+    FOI SE TORNANDO ESPECIAL.]
+  </p>
+
+  <div class="divider">☆ ♡ ☆</div>
+</section>
+
+<section class="section">
+  <p class="chapter">NOSSO TEMPO</p>
+  <h2>Cada segundo importa</h2>
+
+  <p>
+    Desde o início da nossa história,
+    cada instante faz parte de nós.
+  </p>
+
+  <div class="counter">
+    <div class="time">
+      <strong id="days">00</strong>
+      <span>DIAS</span>
+    </div>
+
+    <div class="time">
+      <strong id="hours">00</strong>
+      <span>HORAS</span>
+    </div>
+
+    <div class="time">
+      <strong id="minutes">00</strong>
+      <span>MINUTOS</span>
+    </div>
+
+    <div class="time">
+      <strong id="seconds">00</strong>
+      <span>SEGUNDOS</span>
+    </div>
+  </div>
+
+  <div class="divider">♡</div>
+</section>
+
+<section class="section" id="cap3">
+  <p class="chapter">CAPÍTULO III</p>
+  <h2>As pequenas coisas</h2>
+  <div class="divider">☆</div>
+
+  <p>
+    [ESCREVA AQUI SOBRE AS COISAS PEQUENAS
+    QUE VOCÊ AMA NA PESSOA, OS DETALHES,
+    AS CONVERSAS E OS SORRISOS.]
+  </p>
+
+  <div class="divider">✧ ♡ ✧</div>
+</section>
+
+<section class="section" id="cap4">
+  <p class="chapter">CAPÍTULO IV</p>
+  <h2>Nós</h2>
+  <div class="divider">☆</div>
+
+  <p>
+    [ESCREVA AQUI SOBRE O QUE VOCÊ ESPERA
+    DO FUTURO E TUDO QUE AINDA QUER VIVER
+    AO LADO DESSA PESSOA.]
+  </p>
+
+  <div class="divider">♡ ☆ ♡</div>
+</section>
+
+<!-- CARTA DOS DOIS MESES -->
+<section class="section" id="carta">
+  <p class="chapter">UMA ÚLTIMA COISINHA</p>
+  <h2>Feliz dois meses! 💙</h2>
+  <div class="divider">✧ ☆ ✧</div>
+
+  <p class="letter">
+    Oi meu amor, ou como prefiro chamar my a littler candy of Milk,
+    hoje completamos dois meses, nesse tempo passamos por altos e baixos,
+    discussões, mais felizmente fomos forte e o nosso amor só cresceu
+    e se tornou mais forte, hoje dia 2/11 fazemos 2 messes e que venha
+    a se tornar 3,4,5,6,7 é até mesmo anos, quero que saiba meu amor
+    que nada ou ninguém vai conseguir afetar ou abalar oq sinto por vc
+    meu amor, oq tenho de você é só para vc, e mais ninguem, tou
+    morrendoooo de saudade meu amor, sei que vc nn quer lembrar,
+    mais se possível antes da minha ida a são Paulo vamos ver se
+    conseguimos tirar alguma foto junto, quero levar de recordação
+    e me fazer sentir está mais perto de vc meu bem.
+    <br><br>
+
+    Aqui vai um confissão: eu odeiooo tirar foto, mas sou louco para
+    tirar uma foto junto com vc, eu tenho um ft nossa graças a aquele
+    negócio infeliz akaka.
+    <br><br>
+
+    Em fim meu amor eu te amooo muitoo mesmo, eu nem consigo dizer
+    em palavras o qual grande é meu amor por vc meu anjo.
+  </p>
+
+  <div class="divider">♡ ✧ ♡</div>
+
+  <p class="signature">
+    DE: TOMAS
+    <br><br>
+    PARA: MEU AMORZINHO 🩵
+  </p>
+
+  <div class="doodle">☆ ♡ ☆</div>
+</section>
+
+<!-- ENCERRAMENTO -->
+<section class="section">
+  <p class="chapter">NOSSO PRÓXIMO CAPÍTULO</p>
+  <h2>Até nosso próximo capítulo.</h2>
+
+  <div class="divider">✧</div>
+
+  <p>
+    Que a nossa história continue sendo
+    escrita com carinho, amor e muitos
+    momentos inesquecíveis.
+  </p>
+
+  <div class="divider">♡</div>
+
+  <p class="final-message">
+    Você é meu lugar favorito no universo.
+  </p>
+
+  <div class="doodle">☆ ♡ ☆</div>
+</section>
+
+<footer>
+  <div class="doodle">✧ ☆ ✧</div>
+  <p>Feito com amor, especialmente para nós.</p>
+  <p>02.09.2026 — ♡ — 02.11.2026</p>
+</footer>
+
+</main>
+
+<script>
+
+// SENHA
+const SENHA = "the Word";
+
+// ESTRELAS DESENHADAS
+const desenhos = ["☆", "✩", "✧", "⋆", "★"];
+
+for(let i = 0; i < 45; i++) {
+  const star = document.createElement("span");
+  star.className = "star";
+  star.textContent = desenhos[Math.floor(Math.random() * desenhos.length)];
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.fontSize = (12 + Math.random() * 23) + "px";
+  star.style.animationDelay = Math.random() * 4 + "s";
+
+  document.getElementById("sky").appendChild(star);
+}
+
+// TROCAR DE TELA
+function changeScreen(id) {
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+// CONFERIR SENHA
+function checkPassword() {
+  const password = document.getElementById("password").value;
+
+  if(password === SENHA) {
+    document.getElementById("error").textContent = "";
+    changeScreen("welcome");
+  } else {
+    document.getElementById("error").textContent =
+      "Ops! Essa não é a nossa senha. Tente novamente ♡";
+  }
+}
+
+// ENTER PARA ENTRAR
+document.getElementById("password").addEventListener("keydown", function(e) {
+  if(e.key === "Enter") checkPassword();
+});
+
+// ABRIR SITE
+function showSite() {
+  document.getElementById("welcome").classList.remove("active");
+  document.getElementById("site").style.display = "block";
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+// CONTADOR
+const inicio = new Date(2026, 8, 2, 0, 0, 0);
+
+function atualizarContador() {
+  const agora = new Date();
+  const diferenca = agora - inicio;
+
+  if(diferenca < 0) return;
+
+  const dias = Math.floor(diferenca / 86400000);
+  const horas = Math.floor((diferenca / 3600000) % 24);
+  const minutos = Math.floor((diferenca / 60000) % 60);
+  const segundos = Math.floor((diferenca / 1000) % 60);
+
+  document.getElementById("days").textContent = dias;
+  document.getElementById("hours").textContent = String(horas).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutos).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(segundos).padStart(2, "0");
+}
+
+atualizarContador();
+setInterval(atualizarContador, 1000);
+
+</script>
+
+</body>
+</html>
